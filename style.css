@@ -82,19 +82,32 @@ table {
   border-spacing: 0 10px;
 }
 
+/* 🔥 PC 안정화 */
+thead {
+  display: none;
+}
+
 tr {
   background: white;
   border-radius: 10px;
+  overflow: hidden; /* 🔥 줄깨짐 방지 */
 }
 
 td {
   padding: 14px;
 }
 
-td:first-child { font-weight: 600; }
+td:first-child {
+  font-weight: 600;
+}
 
 td:last-child {
   text-align: right;
+}
+
+/* 날짜 줄바꿈 방지 */
+td:nth-child(3) {
+  white-space: nowrap;
 }
 
 td a {
@@ -113,13 +126,9 @@ td button {
 }
 
 /* ========================= */
-/* ✅ 모바일 (여기만 적용됨) */
+/* ✅ 모바일 */
 /* ========================= */
 @media (max-width:600px) {
-
-  thead {
-    display: none;
-  }
 
   #searchInput {
     width: 200px;
@@ -132,7 +141,7 @@ td button {
   tr {
     display: block;
     margin-bottom: 15px;
-    padding: 16px 18px;
+    padding: 12px 16px; /* 🔥 카드 크기 줄임 */
   }
 
   td {
@@ -146,7 +155,7 @@ td button {
     margin-bottom: 10px;
   }
 
-  /* 라벨 (모바일 전용) */
+  /* 라벨 */
   td:nth-child(2)::before { content: "가수 "; }
   td:nth-child(3)::before { content: "날짜 "; }
   td:nth-child(4)::before { content: "태그 "; }
@@ -160,12 +169,12 @@ td button {
     font-size: 12px;
   }
 
-  /* 버튼 */
+  /* 버튼 (위로 올림) */
   td:last-child {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-    margin-top: 12px;
+    margin-top: 6px; /* 🔥 위로 */
     padding-right: 8px;
   }
 
