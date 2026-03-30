@@ -117,7 +117,9 @@ td button {
 /* 모바일 */
 @media (max-width:600px) {
 
-  /* 테이블 → 카드 형태 유지하면서 보기 좋게 */
+  #searchInput { width: 200px; }
+
+  /* 🔽 여기부터 추가 */
   table, tbody, tr, td {
     display: block;
     width: 100%;
@@ -129,36 +131,26 @@ td button {
 
   td {
     display: flex;
-    justify-content: flex-start;  /* 🔥 변경 */
-    align-items: center;
-    gap: 10px;                    /* 🔥 추가 */
-    padding: 6px 0;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-wrap: wrap; /* 🔥 핵심 */
   }
 
-  /* 제목은 강조 유지 */
-  td:first-child {
-    font-weight: 600;
+  td span {
+    word-break: break-word; /* 🔥 핵심 */
   }
 
-  /* 라벨 추가 (디자인 영향 최소) */
   td:nth-child(2)::before { content: "가수"; color:#999; font-size:12px; }
   td:nth-child(3)::before { content: "날짜"; color:#999; font-size:12px; }
   td:nth-child(4)::before { content: "태그"; color:#999; font-size:12px; }
 
   td::before {
     margin-right: 8px;
-    min-width: 40px;  /* 🔥 추가 (정렬 안정) */
   }
 
-  /* 버튼 정렬 유지 */
   td:last-child {
     justify-content: flex-end;
     gap: 8px;
-  }
-
-  /* 검색창만 살짝 조정 */
-  #searchInput {
-    width: 85%;
   }
 
 }

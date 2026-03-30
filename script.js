@@ -965,10 +965,13 @@ function displaySongs(filter="") {
       <tr>
         <td>${song.title}</td>
         <td>
-          ${song.mainArtist.join(", ")}
-          ${song.featArtist && song.featArtist.length > 0 
-            ? " feat. " + song.featArtist.join(", ") 
-            : ""}
+          <span>
+            ${song.mainArtist.join(", ")}
+            ${song.featArtist && song.featArtist.length > 0 
+              ? " feat. " + song.featArtist.join(", ") 
+              : ""}
+          </span>
+        </td>
         </td>
         <td>${song.date}</td>
         <td>${song.tag}</td>
