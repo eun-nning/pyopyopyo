@@ -112,12 +112,18 @@ td button {
   font-size: 18px;
 }
 
-/* 모바일 */
+/* ========================= */
+/* ✅ 모바일 (여기만 적용됨) */
+/* ========================= */
 @media (max-width:600px) {
 
-  thead { display: none; }
+  thead {
+    display: none;
+  }
 
-  #searchInput { width: 200px; }
+  #searchInput {
+    width: 200px;
+  }
 
   tbody {
     display: block;
@@ -131,16 +137,20 @@ td button {
 
   td {
     display: block;
-    padding: 4px 0;
+    padding: 6px 0;
   }
 
   /* 제목 */
   td:first-child {
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
-  /* 라벨 */
+  /* 라벨 (모바일 전용) */
+  td:nth-child(2)::before { content: "가수 "; }
+  td:nth-child(3)::before { content: "날짜 "; }
+  td:nth-child(4)::before { content: "태그 "; }
+
   td:nth-child(2)::before,
   td:nth-child(3)::before,
   td:nth-child(4)::before {
@@ -150,13 +160,13 @@ td button {
     font-size: 12px;
   }
 
-  /* 버튼 영역 */
+  /* 버튼 */
   td:last-child {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
     margin-top: 12px;
-    padding-right: 5px;
+    padding-right: 8px;
   }
 
 }
