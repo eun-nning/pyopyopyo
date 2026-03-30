@@ -119,38 +119,38 @@ td button {
 
   #searchInput { width: 200px; }
 
-  /* 🔽 여기부터 추가 */
-  table, tbody, tr, td {
+  tbody {
     display: block;
-    width: 100%;
   }
 
   tr {
-    margin-bottom: 12px;
+    display: block;
+    margin-bottom: 15px;
+    padding: 12px;
   }
 
   td {
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px;
-    flex-wrap: wrap; /* 🔥 핵심 */
+    display: block;  /* 🔥 flex 제거 */
+    padding: 4px 0;
   }
 
-  td span {
-    word-break: break-word; /* 🔥 핵심 */
+  /* 제목 */
+  td:first-child {
+    font-weight: 600;
+    margin-bottom: 8px;
   }
 
-  td:nth-child(2)::before { content: "가수"; color:#999; font-size:12px; }
-  td:nth-child(3)::before { content: "날짜"; color:#999; font-size:12px; }
-  td:nth-child(4)::before { content: "태그"; color:#999; font-size:12px; }
+  /* 라벨 */
+  td:nth-child(2)::before { content: "가수 "; color:#999; font-size:12px; }
+  td:nth-child(3)::before { content: "날짜 "; color:#999; font-size:12px; }
+  td:nth-child(4)::before { content: "태그 "; color:#999; font-size:12px; }
 
-  td::before {
-    margin-right: 8px;
-  }
-
+  /* 버튼 영역 따로 */
   td:last-child {
+    display: flex;
     justify-content: flex-end;
-    gap: 8px;
+    gap: 10px;
+    margin-top: 10px;
   }
 
 }
