@@ -26,6 +26,13 @@ body {
   transform: scale(1.05);
 }
 
+/* 페이지 제목 */
+#pageTitle {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #666;
+}
+
 /* 검색 */
 #searchInput {
   display: block;
@@ -39,7 +46,7 @@ body {
 
 #searchInput:focus {
   width: 320px;
-  box-shadow: 0 4px 12px rgba(255,236,23,0.874);
+  box-shadow: 0 4px 12px rgba(252,232,131,0.3);
   outline: none;
 }
 
@@ -80,7 +87,7 @@ thead { display: none; }
 
 tr {
   background: white;
-  box-shadow: 0 4px 14px rgba(255, 236, 23, 0.874);
+  box-shadow: 0 4px 14px rgba(255,236,23,0.874);
   border-radius: 10px;
 }
 
@@ -110,60 +117,48 @@ td button {
 }
 
 /* 모바일 */
-@media (max-width: 600px) {
+@media (max-width:600px) {
 
-  /* 테이블 구조 깨기 */
+  /* 테이블 → 카드 형태 유지하면서 보기 좋게 */
   table, tbody, tr, td {
     display: block;
     width: 100%;
   }
 
   tr {
-    margin-bottom: 15px;
-    padding: 12px;
-    border-radius: 12px;
+    margin-bottom: 12px;
   }
 
   td {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 6px 0;
-    font-size: 14px;
   }
 
-  /* 제목 */
-  td:nth-child(1) {
+  /* 제목은 강조 유지 */
+  td:first-child {
     font-weight: 600;
-    font-size: 15px;
   }
 
-  /* 라벨 붙이기 */
-  td:nth-child(2)::before { content: "가수"; color:#999; }
-  td:nth-child(3)::before { content: "날짜"; color:#999; }
-  td:nth-child(4)::before { content: "태그"; color:#999; }
+  /* 라벨 추가 (디자인 영향 최소) */
+  td:nth-child(2)::before { content: "가수"; color:#999; font-size:12px; }
+  td:nth-child(3)::before { content: "날짜"; color:#999; font-size:12px; }
+  td:nth-child(4)::before { content: "태그"; color:#999; font-size:12px; }
 
   td::before {
-    margin-right: 10px;
-    font-size: 12px;
+    margin-right: 8px;
   }
 
-  /* 버튼 정렬 */
+  /* 버튼 정렬 유지 */
   td:last-child {
     justify-content: flex-end;
     gap: 8px;
   }
 
-  /* 검색창 */
+  /* 검색창만 살짝 조정 */
   #searchInput {
-    width: 80%;
-  }
-
-  #searchInput:focus {
-    width: 90%;
-  }
-  
-  .container {
-    padding: 10px;
+    width: 85%;
   }
 
 }

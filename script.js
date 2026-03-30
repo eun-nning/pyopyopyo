@@ -1037,6 +1037,7 @@ function showFavoritesPage(){
 // 제목
 function updateTitle(){
   const el = document.getElementById("pageTitle");
+  if(!el) return;
   el.textContent = currentView==="favorites" ? "⭐ 즐겨찾기" : "전체 아카이브";
 }
 
