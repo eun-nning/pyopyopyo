@@ -20,7 +20,7 @@ function normalize(text) {
 
 // 데이터
 const songs = [
-    {
+      {
     title: "내일이 오면",
     titleAlt: [],
 
@@ -954,11 +954,13 @@ function displaySongs(filter="") {
   }
 
   if(currentView==="favorites") {
-    filtered = filtered.filter(s=>favorites.includes(`${s.title}_${s.date}`));
+    filtered = filtered.filter(s =>
+      favorites.includes(`${s.title}_${s.date}_${s.mainArtist[0]}`)
+    );
   }
 
   filtered.forEach(song=>{
-    const key = `${song.title}_${song.date}`;
+    const key = `${song.title}_${song.date}_${song.mainArtist[0]}`;
     const isFav = favorites.includes(key);
 
     const row = `
@@ -994,13 +996,9 @@ document.getElementById("searchInput").addEventListener("input", e=>{
   displaySongs(e.target.value);
 });
 
-// 정렬 (안정적으로 수정🔥)
+// 정렬
 function sortByNewest() {
-  songs.sort((a,b)=>{
-    const diff = new Date(b.date) - new Date(a.date);
-    if(diff !== 0) return diff;
-    return 0;
-  });
+  songs.sort((a,b)=> new Date(b.date) - new Date(a.date));
   displaySongs(searchInput.value);
 }
 
@@ -1015,9 +1013,10 @@ function filterByTag(tag) {
   displaySongs(searchInput.value);
 }
 
-// 즐겨찾기
+// ⭐ 즐겨찾기 (핵심 수정🔥)
 function toggleFavorite(title,date){
-  const key = `${title}_${date}`;
+  const song = songs.find(s => s.title === title && s.date === date);
+  const key = `${title}_${date}_${song.mainArtist[0]}`;
 
   if(favorites.includes(key)){
     favorites = favorites.filter(f=>f!==key);
@@ -1040,7 +1039,7 @@ function showFavoritesPage(){
   displaySongs(searchInput.value);
 }
 
-// 제목 (전체 텍스트 제거 유지)
+// 제목
 function updateTitle(){
   const el = document.getElementById("pageTitle");
   if(!el) return;
