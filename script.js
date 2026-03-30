@@ -940,14 +940,13 @@ function displaySongs(filter="") {
   let filtered = songs.filter(song => {
     const search = normalize(filter);
 
-    const match =
+    return (
       normalize(song.title).includes(search) ||
       song.titleAlt?.some(t=>normalize(t).includes(search)) ||
       song.mainArtist.some(a=>normalize(a).includes(search)) ||
       song.featArtist?.some(a=>normalize(a).includes(search)) ||
-      getChosung(song.title).includes(search);
-
-    return match;
+      getChosung(song.title).includes(search)
+    );
   });
 
   if(currentTag) {
@@ -959,30 +958,31 @@ function displaySongs(filter="") {
   }
 
   filtered.forEach(song=>{
-    const isFav = favorites.includes(song.title+song.date);
+    const key = song.title + song.date;
+    const isFav = favorites.includes(key);
 
     const row = `
       <tr>
         <td>${song.title}</td>
+
         <td>
-          <span>
-            ${song.mainArtist.join(", ")}
-            ${song.featArtist && song.featArtist.length > 0 
-              ? " feat. " + song.featArtist.join(", ") 
-              : ""}
-          </span>
+          ${song.mainArtist.join(", ")}
+          ${song.featArtist.length ? " feat. " + song.featArtist.join(", ") : ""}
         </td>
-        </td>
+
         <td>${song.date}</td>
+
+        <td>${song.tag}</td>
+
         <td>
-          ${song.tag}
-          <span class="actions">
-            <button>⭐</button>
-            <a href="${song.link}">보기</a>
-          </span>
+          <button onclick="toggleFavorite('${song.title}','${song.date}')">
+            ${isFav ? "★" : "☆"}
+          </button>
+          <a href="${song.link}" target="_blank">보기</a>
         </td>
       </tr>
     `;
+
     table.innerHTML += row;
   });
 
@@ -1009,13 +1009,9 @@ function sortByOldest() {
   displaySongs(searchInput.value);
 }
 
-// 태그 (토글 기능 추가🔥)
+// 태그
 function filterByTag(tag) {
-  if(currentTag === tag) {
-    currentTag = null; // 다시 누르면 해제
-  } else {
-    currentTag = tag;
-  }
+  currentTag = currentTag === tag ? null : tag;
   displaySongs(searchInput.value);
 }
 
@@ -1046,7 +1042,7 @@ function showFavoritesPage(){
 function updateTitle(){
   const el = document.getElementById("pageTitle");
   if(!el) return;
-  el.textContent = currentView==="favorites" ? "⭐ 즐겨찾기" : "전체 아카이브";
+  el.textContent = currentView==="favorites" ? "★ 즐겨찾기" : "";
 }
 
 // 실행

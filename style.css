@@ -41,7 +41,6 @@ body {
   width: 260px;
   border-radius: 999px;
   border: 1px solid #eee;
-  transition: 0.2s;
 }
 
 #searchInput:focus {
@@ -66,60 +65,46 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background: #fce883;
-  color: white;
-}
-
+button:hover,
 button.active {
   background: #fce883;
   color: white;
 }
 
-/* 테이블 카드 */
+/* 테이블 */
 table {
   width: 100%;
   border-spacing: 0 10px;
 }
 
-/* 헤더 숨김 */
-thead {
-  display: none;
-}
+thead { display: none; }
 
 tr {
   background: white;
   border-radius: 10px;
-  overflow: hidden;
 }
 
 td {
   padding: 10px 12px;
 }
 
-/* 제목 */
 td:first-child {
   font-weight: 600;
   padding-left: 20px;
 }
 
-/* 날짜 줄바꿈 방지 */
 td:nth-child(3) {
   white-space: nowrap;
 }
 
 /* 버튼 영역 */
 td:last-child {
-  text-align: right;
-  min-width: 90px;
-
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 6px;
 }
 
-/* 보기 버튼 */
 td a {
   background: #fce883;
   color: white;
@@ -127,17 +112,8 @@ td a {
   border-radius: 6px;
   text-decoration: none;
   white-space: nowrap;
-  display: inline-block;
 }
 
-/* ⭐ + 보기 묶음 */
-.actions {
-  float: right;
-  display: flex;
-  gap: 6px;
-}
-
-/* 즐겨찾기 */
 td button {
   border: none;
   background: none;
@@ -145,7 +121,7 @@ td button {
 }
 
 /* ========================= */
-/* ✅ 모바일 */
+/* 모바일 */
 /* ========================= */
 @media (max-width:600px) {
 
@@ -153,9 +129,7 @@ td button {
     width: 200px;
   }
 
-  tbody {
-    display: block;
-  }
+  tbody { display: block; }
 
   tr {
     display: block;
@@ -168,10 +142,9 @@ td button {
     padding: 4px 0;
   }
 
-  /* 제목 (왼쪽 살짝만 줄임) */
   td:first-child {
-    margin-bottom: 4px;
     padding-left: 8px;
+    margin-bottom: 4px;
   }
 
   /* 라벨 */
@@ -182,17 +155,17 @@ td button {
   td:nth-child(2)::before,
   td:nth-child(3)::before,
   td:nth-child(4)::before {
-  display: inline-block;
-  margin-right: 6px;  /* 🔥 이걸로 간격 */
-  color: #999;
-  font-size: 12px;
-}
+    margin-right: 6px;
+    color: #999;
+    font-size: 12px;
+  }
 
-  /* ⭐ + 보기 → 태그 줄 오른쪽에 붙이기 (구조 안 건드림) */
+  /* 버튼 위로 끌어올림 */
   td:last-child {
-    display: inline-flex;
+    display: flex;
+    justify-content: flex-end;
     gap: 6px;
-    margin-left: 8px;
+    margin-top: -22px;
   }
 
 }
