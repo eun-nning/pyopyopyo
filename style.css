@@ -82,6 +82,7 @@ table {
   border-spacing: 0 10px;
 }
 
+/* 헤더 숨김 */
 thead {
   display: none;
 }
@@ -93,18 +94,13 @@ tr {
 }
 
 td {
-  padding: 14px;
+  padding: 10px 12px;
 }
 
 /* 제목 */
 td:first-child {
   font-weight: 600;
   padding-left: 20px;
-}
-
-/* 제목-가수 간격 살짝 줄이기 */
-td:first-child {
-  margin-bottom: 2px;
 }
 
 /* 날짜 줄바꿈 방지 */
@@ -116,6 +112,11 @@ td:nth-child(3) {
 td:last-child {
   text-align: right;
   min-width: 90px;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
 }
 
 /* 보기 버튼 */
@@ -129,12 +130,11 @@ td a {
   display: inline-block;
 }
 
-/* ⭐ 즐겨찾기 */
+/* 즐겨찾기 */
 td button {
   border: none;
   background: none;
   font-size: 18px;
-  margin-right: 6px; /* 🔥 보기 버튼 왼쪽으로 */
 }
 
 /* ========================= */
@@ -161,9 +161,10 @@ td button {
     padding: 4px 0;
   }
 
-  /* 제목 */
+  /* 제목 (왼쪽 살짝만 줄임) */
   td:first-child {
-    margin-bottom: 4px; /* 🔥 간격 줄임 */
+    margin-bottom: 4px;
+    padding-left: 8px;
   }
 
   /* 라벨 */
@@ -180,16 +181,11 @@ td button {
     font-size: 12px;
   }
 
-  /* 🔥 핵심: 태그 줄에 버튼 붙이기 */
-  td:nth-child(4) {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
+  /* ⭐ + 보기 → 태그 줄 오른쪽에 붙이기 (구조 안 건드림) */
   td:last-child {
-    display: flex;
+    display: inline-flex;
     gap: 6px;
+    margin-left: 8px;
   }
 
 }
