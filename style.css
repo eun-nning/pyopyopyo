@@ -82,8 +82,6 @@ table {
   border-spacing: 0 10px;
 }
 
-thead { display: none; }
-
 tr {
   background: white;
   border-radius: 10px;
@@ -117,6 +115,8 @@ td button {
 /* 모바일 */
 @media (max-width:600px) {
 
+  thead { display: none; }
+
   #searchInput { width: 200px; }
 
   tbody {
@@ -126,11 +126,11 @@ td button {
   tr {
     display: block;
     margin-bottom: 15px;
-    padding: 12px;
+    padding: 16px 18px;
   }
 
   td {
-    display: block;  /* 🔥 flex 제거 */
+    display: block;
     padding: 4px 0;
   }
 
@@ -141,16 +141,22 @@ td button {
   }
 
   /* 라벨 */
-  td:nth-child(2)::before { content: "가수 "; color:#999; font-size:12px; }
-  td:nth-child(3)::before { content: "날짜 "; color:#999; font-size:12px; }
-  td:nth-child(4)::before { content: "태그 "; color:#999; font-size:12px; }
+  td:nth-child(2)::before,
+  td:nth-child(3)::before,
+  td:nth-child(4)::before {
+    display: inline-block;
+    width: 45px;
+    color: #999;
+    font-size: 12px;
+  }
 
-  /* 버튼 영역 따로 */
+  /* 버튼 영역 */
   td:last-child {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 12px;
+    padding-right: 5px;
   }
 
 }
