@@ -46,7 +46,6 @@ body {
 
 #searchInput:focus {
   width: 320px;
-  box-shadow: 0 4px 12px rgba(252,232,131,0.3);
   outline: none;
 }
 
@@ -87,7 +86,6 @@ thead { display: none; }
 
 tr {
   background: white;
-  box-shadow: 0 4px 14px rgba(255,236,23,0.874);
   border-radius: 10px;
 }
 
