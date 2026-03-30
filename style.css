@@ -1,5 +1,5 @@
 body {
-  background-color: #ffffd4;
+  background-color: #fffdf5;
   margin: 0;
   font-family: 'Noto Sans KR', sans-serif;
 }
@@ -129,8 +129,9 @@ td button {
 
   td {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;  /* 🔥 변경 */
     align-items: center;
+    gap: 10px;                    /* 🔥 추가 */
     padding: 6px 0;
   }
 
@@ -146,6 +147,7 @@ td button {
 
   td::before {
     margin-right: 8px;
+    min-width: 40px;  /* 🔥 추가 (정렬 안정) */
   }
 
   /* 버튼 정렬 유지 */
