@@ -130,6 +130,13 @@ td a {
   display: inline-block;
 }
 
+/* ⭐ + 보기 묶음 */
+.actions {
+  float: right;
+  display: flex;
+  gap: 6px;
+}
+
 /* 즐겨찾기 */
 td button {
   border: none;
@@ -175,11 +182,11 @@ td button {
   td:nth-child(2)::before,
   td:nth-child(3)::before,
   td:nth-child(4)::before {
-    display: inline-block;
-    width: 45px;
-    color: #999;
-    font-size: 12px;
-  }
+  display: inline-block;
+  margin-right: 6px;  /* 🔥 이걸로 간격 */
+  color: #999;
+  font-size: 12px;
+}
 
   /* ⭐ + 보기 → 태그 줄 오른쪽에 붙이기 (구조 안 건드림) */
   td:last-child {

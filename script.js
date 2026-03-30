@@ -974,12 +974,12 @@ function displaySongs(filter="") {
         </td>
         </td>
         <td>${song.date}</td>
-        <td>${song.tag}</td>
         <td>
-          <button onclick="toggleFavorite('${song.title}','${song.date}')">
-            ${isFav ? "⭐" : "☆"}
-          </button>
-          <a href="${song.link}" target="_blank">보기</a>
+          ${song.tag}
+          <span class="actions">
+            <button>⭐</button>
+            <a href="${song.link}">보기</a>
+          </span>
         </td>
       </tr>
     `;
