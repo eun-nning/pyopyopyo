@@ -1,24 +1,10 @@
-// 상태
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 let currentView = "all";
 let currentTag = null;
 
-// 초성
-function getChosung(text) {
-  const chosung = ["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
-  return text.split("").map(char => {
-    const code = char.charCodeAt(0) - 44032;
-    if (code >= 0 && code <= 11171) return chosung[Math.floor(code / 588)];
-    return char;
-  }).join("");
-}
+function normalize(t){return t.toLowerCase().replace(/\s+/g,"");}
 
-// 정규화
-function normalize(text) {
-  return text.toLowerCase().replace(/\s+/g,"").replace(/[^a-z0-9가-힣ㄱ-ㅎ]/g,"");
-}
-
-// 데이터
+// 샘플
 const songs = [
   {
     title: "내일이 오면",
@@ -932,113 +918,60 @@ const songs = [
   },
 ];
 
-// 출력
-function displaySongs(filter="") {
+function displaySongs(filter=""){
   const table = document.getElementById("songTable");
-  table.innerHTML = "";
+  table.innerHTML="";
 
-  let filtered = songs.filter(song => {
-    const search = normalize(filter);
+  let filtered = songs.filter(s =>
+    normalize(s.title).includes(normalize(filter))
+  );
 
-    const match =
-      normalize(song.title).includes(search) ||
-      song.titleAlt?.some(t=>normalize(t).includes(search)) ||
-      song.mainArtist.some(a=>normalize(a).includes(search)) ||
-      song.featArtist?.some(a=>normalize(a).includes(search)) ||
-      getChosung(song.title).includes(search);
+  if(currentTag) filtered = filtered.filter(s=>s.tag===currentTag);
+  if(currentView==="favorites") filtered = filtered.filter(s=>favorites.includes(s.title+s.date));
 
-    return match;
-  });
+  filtered.forEach(s=>{
+    const fav = favorites.includes(s.title+s.date);
 
-  if(currentTag) {
-    filtered = filtered.filter(s=>s.tag===currentTag);
-  }
-
-  if(currentView==="favorites") {
-    filtered = filtered.filter(s=>favorites.includes(s.title+s.date));
-  }
-
-  filtered.forEach(song=>{
-    const isFav = favorites.includes(song.title+song.date);
-
-    const row = `
+    table.innerHTML += `
       <tr>
-        <td>${song.title}</td>
-        <td>${song.mainArtist.join(", ")}</td>
-        <td>${song.date}</td>
-        <td>${song.tag}</td>
+        <td>${s.title}</td>
+        <td>${s.mainArtist.join(",")}</td>
+        <td>${s.date}</td>
+        <td>${s.tag}</td>
         <td>
-          <button onclick="toggleFavorite('${song.title}','${song.date}')">
-            ${isFav ? "⭐" : "☆"}
-          </button>
-          <a href="${song.link}" target="_blank">보기</a>
+          <button onclick="toggleFavorite('${s.title}','${s.date}')">${fav?"⭐":"☆"}</button>
+          <a href="${s.link}" target="_blank">보기</a>
         </td>
       </tr>
     `;
-    table.innerHTML += row;
   });
-
-  updateTitle();
 }
 
-// 검색
-document.getElementById("searchInput").addEventListener("input", e=>{
-  displaySongs(e.target.value);
-});
-
-// 정렬
-function sortByNewest() {
-  songs.sort((a,b)=>{
-    const diff = new Date(b.date)-new Date(a.date);
-    if(diff!==0) return diff;
-    return songs.indexOf(b)-songs.indexOf(a);
-  });
-  displaySongs(searchInput.value);
-}
-
-function sortByOldest() {
-  songs.sort((a,b)=>new Date(a.date)-new Date(b.date));
-  displaySongs(searchInput.value);
-}
-
-// 태그 (토글 기능 추가🔥)
-function filterByTag(tag) {
-  if(currentTag === tag) {
-    currentTag = null; // 다시 누르면 해제
-  } else {
-    currentTag = tag;
-  }
-  displaySongs(searchInput.value);
-}
-
-// 즐겨찾기
-function toggleFavorite(title,date){
-  const key = title+date;
-  if(favorites.includes(key)){
-    favorites = favorites.filter(f=>f!==key);
-  } else {
-    favorites.push(key);
-  }
+function toggleFavorite(t,d){
+  const k=t+d;
+  favorites.includes(k)?favorites=favorites.filter(f=>f!==k):favorites.push(k);
   localStorage.setItem("favorites",JSON.stringify(favorites));
   displaySongs(searchInput.value);
 }
 
-// 페이지
-function showAll(){
-  currentView="all";
+function filterByTag(tag){
+  currentTag = currentTag===tag ? null : tag;
   displaySongs(searchInput.value);
 }
 
-function showFavoritesPage(){
-  currentView="favorites";
+function sortByNewest(){
+  songs.reverse();
   displaySongs(searchInput.value);
 }
 
-// 제목
-function updateTitle(){
-  const el = document.getElementById("pageTitle");
-  el.textContent = currentView==="favorites" ? "⭐ 즐겨찾기" : "전체 노래모음";
+function sortByOldest(){
+  songs.reverse();
+  displaySongs(searchInput.value);
 }
 
-// 실행
+function showAll(){currentView="all";displaySongs();}
+function showFavoritesPage(){currentView="favorites";displaySongs();}
+
+searchInput.addEventListener("input",e=>displaySongs(e.target.value));
+
 displaySongs();

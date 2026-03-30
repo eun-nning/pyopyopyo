@@ -1,36 +1,24 @@
 body {
-  background-color: #fffdf5;
   margin: 0;
   font-family: 'Noto Sans KR', sans-serif;
+  background: #fffdf5;
 }
 
+/* 컨테이너 */
 .container {
   max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
+  margin: auto;
+  padding: 15px;
 }
 
 /* 로고 */
 .title-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 30px 0;
+  text-align: center;
+  margin: 20px 0;
 }
 
 .title-logo {
-  width: 240px;
-  transition: transform 0.3s;
-}
-
-.title-logo:hover {
-  transform: scale(1.05);
-}
-
-/* 페이지 제목 */
-#pageTitle {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #666;
+  width: 220px;
 }
 
 /* 검색 */
@@ -41,13 +29,6 @@ body {
   width: 260px;
   border-radius: 999px;
   border: 1px solid #eee;
-  transition: 0.2s;
-}
-
-#searchInput:focus {
-  width: 320px;
-  box-shadow: 0 4px 12px rgba(255, 236, 23, 0.874);
-  outline: none;
 }
 
 /* 버튼 */
@@ -60,11 +41,10 @@ body {
 }
 
 button {
+  padding: 8px 14px;
+  border-radius: 999px;
   border: 1px solid #eee;
   background: white;
-  padding: 7px 14px;
-  border-radius: 999px;
-  cursor: pointer;
 }
 
 button:hover {
@@ -77,25 +57,21 @@ button.active {
   color: white;
 }
 
-/* 테이블 카드 */
+/* 카드 */
 table {
   width: 100%;
   border-spacing: 0 10px;
 }
 
-thead { display: none; }
-
 tr {
   background: white;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 10px rgba(255, 236, 23, 0.874);
   border-radius: 10px;
 }
 
 td {
-  padding: 14px;
+  padding: 12px;
 }
-
-td:first-child { font-weight: 600; }
 
 td:last-child {
   text-align: right;
@@ -104,19 +80,59 @@ td:last-child {
 td a {
   background: #fce883;
   color: white;
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 5px 10px;
+  border-radius: 5px;
   text-decoration: none;
 }
 
-/* 즐겨찾기 */
+/* ⭐ */
 td button {
   border: none;
   background: none;
   font-size: 18px;
 }
 
-/* 모바일 */
+/* ===== 모바일 카드 변환 ===== */
 @media (max-width:600px) {
-  #searchInput { width: 200px; }
+
+  table, tbody, tr, td {
+    display: block;
+    width: 100%;
+  }
+
+  tr {
+    margin-bottom: 15px;
+    padding: 12px;
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  td:nth-child(2)::before { content: "가수"; }
+  td:nth-child(3)::before { content: "날짜"; }
+  td:nth-child(4)::before { content: "태그"; }
+
+  td::before {
+    color: #fff04eec;
+    font-size: 12px;
+  }
+
+}
+
+/* 하단 탭바 */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  border-top: 1px solid #eee;
+  display: flex;
+}
+
+.bottom-nav button {
+  flex: 1;
+  padding: 12px;
+  border: none;
 }
