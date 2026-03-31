@@ -979,7 +979,7 @@ function displaySongs(filter="") {
         <td>
           <button onclick="toggleFavorite('${song.title}','${song.date}')">
             <span class="fav ${isFav ? 'on' : ''}">
-             ${isFav ? "♥" : "♡"}
+             ${isFav ? "★" : "☆"}
             </span>
           </button>
           <a href="${song.link}" target="_blank">보기</a>
@@ -1045,7 +1045,7 @@ function showFavoritesPage(){
 function updateTitle(){
   const el = document.getElementById("pageTitle");
   if(!el) return;
-  el.textContent = currentView==="favorites" ? "♥ 즐겨찾기" : "";
+  el.textContent = currentView==="favorites" ? "★ 즐겨찾기" : "";
 }
 
 // 실행
