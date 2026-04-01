@@ -67,7 +67,7 @@ button {
 
 button:hover,
 button.active {
-  background: #d4ba97;
+  background: #dcc5a6;
   color: white;
 }
 
@@ -106,7 +106,7 @@ td:last-child {
 }
 
 td a {
-  background: #d4ba97;
+  background: #dcc5a6;
   color: white;
   padding: 6px 12px;
   border-radius: 6px;
